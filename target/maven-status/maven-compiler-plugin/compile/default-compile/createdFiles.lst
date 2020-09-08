@@ -3,6 +3,7 @@ GAJI/config/kafka/KafkaProcessor.class
 GAJI/AbstractEvent$1.class
 GAJI/Product.class
 GAJI/AbstractEvent.class
+GAJI/Left.class
 GAJI/ProductApplication.class
 GAJI/StatusChanged.class
 GAJI/PaymentCompleted.class

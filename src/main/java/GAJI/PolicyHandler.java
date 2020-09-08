@@ -8,6 +8,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,19 @@ public class PolicyHandler{
     @StreamListener(KafkaProcessor.INPUT)
     public void onStringEventListener(@Payload String eventString){
 
+    }
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void wheneverLeft_Delete(@Payload Left left){
+        if(left.isMe()){
+            Iterator<Product> iterator = productRepository.findAll().iterator();
+            while(iterator.hasNext()){
+                Product product = iterator.next();
+                if(product.getMemberId() == left.getId()) {
+                    productRepository.deleteById(product.getId());
+                }
+            }
+        }
     }
 
     @StreamListener(KafkaProcessor.INPUT)
